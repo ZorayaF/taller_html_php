@@ -42,11 +42,19 @@
 </head>
 <body>
     <h1>Menú de navegación</h1>
+<<<<<<< HEAD
     <ul>
         <li><a href="/taller_html_php/ejercicio1/index.php">Lista de números</a></li>
         <li><a href="/taller_html_php/ejercicio2/interfaz/iuFiguras.php">Cálculo del área de figuras geométricas</a></li>
         <li><a href="/taller_html_php/ejercicio3/index3.php">Cálculo del promedio de asignaturas</a></li>
         <li><a href="#">Gestión de docentes y cursos</a></li>
     </ul>
+=======
+    <a href="/taller_html_php/ejercicio1/index.php">Lista de números</a><br>
+    <a href="/taller_html_php/ejercicio2/interfaz/iuFiguras.php">Cálculo del área de figuras geométricas</a><br>
+    <a href="/taller_html_php/ejercicio3/index3.php">Cálculo del promedio de asignaturas</a><br>
+    <a href="">Gestón de docentes y cursos</a><br>
+    
+>>>>>>> 5b0dfcfee50bf9284c8b0cc60105b1fc042d2b98
 </body>
 </html>
