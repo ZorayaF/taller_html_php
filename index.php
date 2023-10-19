@@ -47,7 +47,7 @@
         <li><a href="/taller_html_php/ejercicio1/index.php">Lista de números</a></li>
         <li><a href="/taller_html_php/ejercicio2/interfaz/iuFiguras.php">Cálculo del área de figuras geométricas</a></li>
         <li><a href="/taller_html_php/ejercicio3/index3.php">Cálculo del promedio de asignaturas</a></li>
-        <li><a href="#">Gestión de docentes y cursos</a></li>
+        <li><a href="/taller_html_php/ejercicio4/index.php">Gestión de docentes y cursos</a></li>
     </ul>
 =======
     <a href="/taller_html_php/ejercicio1/index.php">Lista de números</a><br>

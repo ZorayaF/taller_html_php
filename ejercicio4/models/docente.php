@@ -1,14 +1,11 @@
 <?php
-class Docente{
-    private $codigo;
-    private $nombre;
-    private $ocupacion;
 
-    function __construct($codigo, $nombre, $ocupacion){
-        $this->$codigo = $codigo;
-        $this->$nombre = $nombre;
-        $this->$ocupacion = $ocupacion;
-    }
+namespace App\models;
+
+class Docente{
+    private $cod;
+    private $nombre;
+    private $idOcupacion;
 
     function get($prop){
         return $this->$prop;

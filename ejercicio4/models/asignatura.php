@@ -1,4 +1,7 @@
 <?php
+
+namespace App\models;
+
 class Asignatura{
     private $codigo;
     private $nombre;
