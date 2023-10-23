@@ -94,9 +94,7 @@
     }
 
     ?>
-    <br>
-    <br>
-        <button onclick="window.history.back()">Regresar</button>
+    
 </body>
 
 </html>
