@@ -4,23 +4,19 @@
     <meta charset="UTF-8">
     <title>Calculadora de Áreas</title>
     <style>
-
 h1 {
     color: #333;
     font-size: 24px;
     text-align: center;
 }
-
 label {
     font-weight: bold;
 }
-
 form {
     margin: 20px;
     padding: 10px;
     border: 1px solid #ccc;
 }
-
 input[type="submit"] {
     background-color: #1f4c7c;
     color: #fff;
@@ -42,7 +38,7 @@ button{
             border-radius: 5px;
             cursor: pointer;
 }
-        </style>
+</style>
 </head>
 <body>
     <h1>Calculadora de Áreas</h1>
@@ -78,10 +74,7 @@ button{
         <input type="submit" value="Calcular Área" name="areaTriangulo">
     </form>
     <button onclick="window.history.back()">Regresar</button>
-
     </div>
-   
-
 </body>
 </html>
 

@@ -5,7 +5,7 @@
     <title>Ordenar Lista de Números</title>
     <style>
         body {
-            background-image: url('tu_imagen_de_fondo.jpg'); /* Ruta de tu imagen de fondo */
+            background-image: url('tu_imagen_de_fondo.jpg'); 
             background-size: cover;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -57,8 +57,6 @@
             cursor: pointer;
         } 
          
-        
-       
     </style>
 </head>
 <body>
@@ -68,7 +66,6 @@
         <input type="text" name="numeros" id="numeros">
         <input type="submit" value="Ordenar">
         <button onclick="window.history.back()">Regresar</button>
-
     </form>
 </body>
 </html>

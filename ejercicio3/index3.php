@@ -3,19 +3,24 @@
 <head>
     <title>Calculadora de Promedio</title>
     <style>
+
         body {
             background-image: url('prom.jpeg'); 
             background-size: cover;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            
         }
+
         h1 {
             background-color: #44878f;
             color: #fff;
             padding: 20px;
             text-align: center;
+            
         }
+
         form {
             background-color: #8caaa2;
             padding: 20px;
@@ -24,12 +29,15 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
+
         label {
-            color: #5a9b95;
+            color: #fff;
             font-weight: bold;
             display: block;
             margin: 10px 0;
+            text-align: center;
         }
+        
         input[type="text"],
         input[type="number"] {
             width: 100%;
@@ -46,6 +54,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         input[type="submit"]:hover {
             background-color: #ff8591;
         }
@@ -58,6 +67,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        
     </style>
 </head>
 <body>
