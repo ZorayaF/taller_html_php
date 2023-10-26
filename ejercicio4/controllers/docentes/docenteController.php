@@ -8,8 +8,7 @@ use App\models\Docente;
 class DocenteController extends EntityController{
   private $docenteDT = 'docentes';
   private $ocupacionDT = 'ocupaciones';
-
-
+  
   private $codD= 'cod';
   private $nombreD = 'nombre';
   private $ocupacionD = 'idOcupacion';
@@ -35,5 +34,70 @@ class DocenteController extends EntityController{
     } 
     return $lista;
   }
+  function getItem($cod)
+    {
+      $sql = "select * from " . $this->docenteDT . " where ".$this->codD." = " . $cod;
+        $resultSQL = $this->execSql($sql);
+        $docente = null;
+        if ($resultSQL->num_rows > 0) {
+            while ($item = $resultSQL->fetch_assoc()) {
+                $docente = new Docente();
+                $docente->set('cod', $item['cod']);
+                $docente->set('nombre', $item['nombre']);
+                $docente->set('idOcupacion', $item['idOcupacion']);
+                break;
+            }
+        }
+        return $docente;
+    }
+
+  function addItem($docente)
+    {
+        $cod = $docente->get('cod');
+        $nombre = $docente->get('nombre');
+        $idOcupacion = $docente->get('idOcupacion');
+        $registro = $this->getItem($cod);
+        if (isset($registro)) {
+            return "El código ya existe";
+        }
+        //reviasr esto
+        $sql = "Insert into " . $this->docenteDT . " (cod,nombre,idOcupacion)value ('$cod','$nombre','$idOcupacion')";
+        $resultSQL = $this->execSql($sql);
+        if (!$resultSQL) {
+            return "no se guardo";
+        }
+        return "se guardo con exito";
+    }
+    function updateItem($docente)
+    {
+        $cod = $docente->get('cod');
+        $nombre = $docente->get('nombre');
+        $idOcupacion = $docente->get('idOcupacion');
+        $registro = $this->getItem($cod);
+        if (!isset($registro)) {
+            return "El registro no existe";
+        }
+        $sql = "update " . $this->docenteDT . " set ";
+        $sql .= "nombre='$nombre',";
+        $sql .= "idOcupacion='$idOcupacion' ";
+        $sql .= " where cod=$cod";
+
+        $resultSQL = $this->execSql($sql);
+        if (!$resultSQL) {
+            return "no se guardo";
+        }
+        return "se guardo con exito";
+    }
+
+    function deleteItem($cod)
+    {
+        $sql = "delete from " . $this->docenteDT;
+        $sql .= " where cod=$cod";
+        $resultSQL = $this->execSql($sql);
+        if ($resultSQL) {
+            return "Registro eliminado";
+        }
+        return "No se pudo eliminar el registro";
+    }
 }
 ?>

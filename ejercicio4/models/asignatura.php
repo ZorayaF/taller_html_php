@@ -7,12 +7,6 @@ class Asignatura{
     private $nombre;
     private $docente;
 
-    function __construct($codigo, $nombre, $docente){
-        $this->$codigo = $codigo;
-        $this->$nombre = $nombre;
-        $this->$docente = $docente;
-    }
-
     function get($prop){
         return $this->$prop;
     }
