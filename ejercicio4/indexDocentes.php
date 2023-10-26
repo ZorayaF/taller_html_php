@@ -44,7 +44,7 @@ $listaDocentes = $docenteController->allData();
                 echo '      <a href="views/formularioDocente.php?operacion=update&cod=' . $docente->get('cod') . '">Modificar</a>';
                 echo '  </td>';
                 echo '  <td>'; 
-                echo '      <a href="views/confirmarEliminacion.php?cod=' . $docente->get('cod') . '">Eliminar</a>';
+                echo '      <a href="views/confirEliminacionDocente.php?cod=' . $docente->get('cod') . '">Eliminar</a>';
                 echo '  </td>';
                 echo '</tr>';
             }

@@ -5,7 +5,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="accionEstudiante.php" method="post">
+    <form action="accionDocente.php" method="post">
         <h1>Confirmar operación</h1>
         <p>¿Desea eliminar el registro?</p>
         <input type="hidden" name="cod" value="<?php echo $_GET['cod'] ?>">
