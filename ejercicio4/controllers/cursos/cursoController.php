@@ -1,11 +1,11 @@
 <?php
 
-namespace App\controllers\docentes;
+namespace App\controllers\cursos;
 
 use App\controllers\EntityController;
-use App\models\Docente;
+use App\models\Curso;
 
-class DocenteController extends EntityController{
+class CursoController extends EntityController{
   private $docenteDT = 'docentes';
   private $ocupacionDT = 'ocupaciones';
   
@@ -93,32 +93,30 @@ class DocenteController extends EntityController{
 
     function deleteItem($cod)
     {
-        // Verifica si el docente tiene cursos asociados
-        $sql_check_courses = "SELECT COUNT(*) as courseCount FROM cursos WHERE codDocente = $cod";
-        $result_check_courses = $this->execSql($sql_check_courses);
-
-        if ($result_check_courses) {
-            $row = $result_check_courses->fetch_assoc();
-            $courseCount = $row['courseCount'];
-
-            if ($courseCount > 0) {
-                // El docente tiene cursos asociados, devuelve un mensaje de error o lanza una excepción
-                return "No se puede eliminar el docente. Tiene cursos asociados.";
+            $sql_get_cod = "SELECT cod FROM " .$this->docenteDT . " WHERE cod = $cod";
+            $result_get_cod = $this->execSql($sql_get_cod);
+        
+            if ($result_get_cod->num_rows > 0) {
+                $row = $result_get_cod->fetch_assoc();
+                $codDocente = $row['cod'];
+            } else {
+                return "El docente no existe";
             }
-        } else {
-            return "Error al verificar los cursos asociados al docente.";
-        }
-
-        // Si no hay cursos asociados, procede con la eliminación
-        $sql = "DELETE FROM " . $this->docenteDT . " WHERE cod = $cod";
-        $resultSQL = $this->execSql($sql);
-
-        if ($resultSQL) {
-            return "Registro eliminado";
-        }
-
-        return "No se pudo eliminar el registro.";
-            
+            // Ahora, eliminamos los registros en la tabla "cursos" relacionados con el docente
+            $sql_delete_cursos = "DELETE FROM cursos WHERE codDocente = $codDocente";
+            $result_delete_cursos = $this->execSql($sql_delete_cursos);
+        
+            // Si se eliminaron con éxito los registros en la tabla "cursos", procedemos a eliminar al docente
+            if ($result_delete_cursos) {
+                $sql_delete_docente = "DELETE FROM " . $this->docenteDT . " WHERE cod = $cod";
+                $result_delete_docente = $this->execSql($sql_delete_docente);
+                if ($result_delete_docente) {
+                    return "Registro eliminado";
+                }
+            }
+        
+            return "No se pudo eliminar el registro";
+        
     }
 }
 ?>

@@ -2,7 +2,7 @@
 
 namespace App\models;
 
-class Asignatura{
+class Curso{
     private $codigo;
     private $nombre;
     private $docente;
