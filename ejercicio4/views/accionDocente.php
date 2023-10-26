@@ -37,6 +37,6 @@ if($operacion=='delete'){
     <?php
     echo $resultado;
     ?>
-    <a href="../index.php">Ir al inicio</a>
+    <a href="../indexDocentes.php">Ir al inicio</a>
 </body>
 </html>

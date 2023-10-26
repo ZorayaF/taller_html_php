@@ -12,5 +12,7 @@
     <button>
         <a href="/taller_html_php/ejercicio4/indexCursos.php">Cursos</a>
     </button>
+    <br>
+    <a href="../index.php">Volver al menú</a>
 </body>
 </html>

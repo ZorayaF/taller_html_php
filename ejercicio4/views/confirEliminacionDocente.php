@@ -11,7 +11,7 @@
         <input type="hidden" name="cod" value="<?php echo $_GET['cod'] ?>">
         <input type="hidden" name="operacion" value="delete">
         <button type="submit">Si</button>
-        <a href="../index.php">No</a>
+        <a href="../indexDocentes.php">No</a>
     </form>
 </body>
 </html>

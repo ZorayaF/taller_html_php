@@ -51,5 +51,6 @@ $listaDocentes = $docenteController->allData();
             ?>
         </tbody>
     </table>
+    <a href="index.php">Ir al inicio</a>
 </body>
 </html>

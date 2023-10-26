@@ -48,5 +48,6 @@ $listaCursos = $cursoController->allCurso();
             ?>
         </tbody>
     </table>
+    <a href="index.php">Ir al inicio</a>
 </body>
 </html>

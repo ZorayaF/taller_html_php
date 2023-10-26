@@ -51,5 +51,6 @@ if ($operacion == 'update') {
         </div>
         <button type="submit">Guardar Cambios</button>
     </form>
+    <a href="../indexCursos.php">Atrás</a>
 </body>
 </html>
