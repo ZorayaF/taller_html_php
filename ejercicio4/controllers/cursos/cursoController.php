@@ -2,120 +2,108 @@
 
 namespace App\controllers\cursos;
 
-use App\controllers\EntityController;
+use App\controllers\EntityControllerCurso;
 use App\models\Curso;
 
-class CursoController extends EntityController{
-  private $docenteDT = 'docentes';
-  private $ocupacionDT = 'ocupaciones';
-  
-  private $codD= 'cod';
-  private $nombreD = 'nombre';
-  private $ocupacionD = 'idOcupacion';
-  private $codigoO = 'id';
-  private $nombreO = 'nombre';
+class CursoController extends EntityControllerCurso{
+    private $cursoDT = 'cursos';
+    private $codCurso = 'cod';
+    private $nombreCurso = 'nombre';
+    private $codDocenteCurso = 'codDocente';
+    private $docenteDT = 'docentes';
+    private $codD = 'cod';
+    private $nombreD = 'nombre';
 
-  
-
-  function allData(){
-    $sql = "SELECT D." . $this->codD . " AS CodigoDocente , D." . $this->nombreD . " AS NombreDocente, O." . $this->nombreO . " AS NombreOcupacion
-            FROM " . $this->docenteDT . " D
-            JOIN " . $this->ocupacionDT . " O ON D." . $this->ocupacionD . " = O." . $this->codigoO;;
-
+  function allCurso(){
+    $sql = "SELECT C." . $this->codCurso . " AS CodigoCurso, C." . $this->nombreCurso . " AS NombreCurso, D." . $this->nombreD . " AS NombreDocente
+            FROM " . $this->cursoDT . " C
+            JOIN " . $this->docenteDT . " D ON C." . $this->codDocenteCurso . " = D." . $this->codD;
 
     $resultSQL = $this->execSql($sql);
     $lista = [];
+
     if($resultSQL->num_rows > 0){
         while($item = $resultSQL->fetch_assoc()){
-            $docente = new Docente();
-            $docente->set('cod', $item['CodigoDocente']);
-            $docente->set('nombre',$item['NombreDocente']);
-            $docente->set('idOcupacion',$item['NombreOcupacion']);
-            array_push($lista, $docente);
+            $curso = new Curso();
+            $curso->set($this->codCurso, $item['CodigoCurso']);
+            $curso->set($this->nombreCurso, $item['NombreCurso']);
+            $curso->set($this->codDocenteCurso, $item['NombreDocente']);
+            array_push($lista, $curso);
         }
     } 
+
     return $lista;
   }
-  function getItem($cod)
+  function getCurso($cod)
     {
-      $sql = "select * from " . $this->docenteDT . " where ".$this->codD." = " . $cod;
+        $sql = "SELECT * FROM " . $this->cursoDT . " WHERE $this->codCurso = $cod";
         $resultSQL = $this->execSql($sql);
-        $docente = null;
+        $curso = null;
+
         if ($resultSQL->num_rows > 0) {
-            while ($item = $resultSQL->fetch_assoc()) {
-                $docente = new Docente();
-                $docente->set('cod', $item['cod']);
-                $docente->set('nombre', $item['nombre']);
-                $docente->set('idOcupacion', $item['idOcupacion']);
-                break;
-            }
+            $item = $resultSQL->fetch_assoc();
+            $curso = new Curso();
+            $curso->set('cod', $item[$this->codCurso]);
+            $curso->set('nombre', $item[$this->nombreCurso]);
+            $curso->set('codDocente', $item[$this->codDocenteCurso]);
         }
-        return $docente;
+
+        return $curso;
     }
 
-  function addItem($docente)
+  function addCurso($curso)
     {
-        $cod = $docente->get('cod');
-        $nombre = $docente->get('nombre');
-        $idOcupacion = $docente->get('idOcupacion');
-        $registro = $this->getItem($cod);
+        $cod = $curso->get('cod');
+        $nombre = $curso->get('nombre');
+        $codDocente = $curso->get('codDocente');
+
+        // Verifica si el curso ya existe
+        $registro = $this->getCurso($cod);
         if (isset($registro)) {
-            return "El código ya existe";
+            return "El código de curso ya existe";
         }
-        //reviasr esto
-        $sql = "Insert into " . $this->docenteDT . " (cod,nombre,idOcupacion)value ('$cod','$nombre','$idOcupacion')";
+
+        // Realiza la inserción del nuevo curso
+        $sql = "INSERT INTO " . $this->cursoDT . " ($this->codCurso, $this->nombreCurso, $this->codDocenteCurso) VALUES ('$cod', '$nombre', '$codDocente')";
         $resultSQL = $this->execSql($sql);
+
         if (!$resultSQL) {
-            return "no se guardo";
+            return "No se pudo guardar el curso";
         }
-        return "se guardo con exito";
+
+        return "Curso guardado con éxito";
     }
-    function updateItem($docente)
+    function updateCurso($curso)
     {
-        $cod = $docente->get('cod');
-        $nombre = $docente->get('nombre');
-        $idOcupacion = $docente->get('idOcupacion');
-        $registro = $this->getItem($cod);
+        $cod = $curso->get('cod');
+        $nombre = $curso->get('nombre');
+        $codDocente = $curso->get('codDocente');
+
+        $registro = $this->getCurso($cod);
         if (!isset($registro)) {
-            return "El registro no existe";
+            return "El curso no existe";
         }
-        $sql = "update " . $this->docenteDT . " set ";
-        $sql .= "nombre='$nombre',";
-        $sql .= "idOcupacion='$idOcupacion' ";
-        $sql .= " where cod=$cod";
 
+        $sql = "UPDATE " . $this->cursoDT . " SET $this->nombreCurso = '$nombre', $this->codDocenteCurso = '$codDocente' WHERE $this->codCurso = '$cod'";
         $resultSQL = $this->execSql($sql);
+
         if (!$resultSQL) {
-            return "no se guardo";
+            return "No se pudo guardar el curso";
         }
-        return "se guardo con exito";
+
+        return "Curso actualizado con éxito";
     }
 
-    function deleteItem($cod)
+    function deleteCurso($cod)
     {
-            $sql_get_cod = "SELECT cod FROM " .$this->docenteDT . " WHERE cod = $cod";
-            $result_get_cod = $this->execSql($sql_get_cod);
-        
-            if ($result_get_cod->num_rows > 0) {
-                $row = $result_get_cod->fetch_assoc();
-                $codDocente = $row['cod'];
-            } else {
-                return "El docente no existe";
-            }
-            // Ahora, eliminamos los registros en la tabla "cursos" relacionados con el docente
-            $sql_delete_cursos = "DELETE FROM cursos WHERE codDocente = $codDocente";
-            $result_delete_cursos = $this->execSql($sql_delete_cursos);
-        
-            // Si se eliminaron con éxito los registros en la tabla "cursos", procedemos a eliminar al docente
-            if ($result_delete_cursos) {
-                $sql_delete_docente = "DELETE FROM " . $this->docenteDT . " WHERE cod = $cod";
-                $result_delete_docente = $this->execSql($sql_delete_docente);
-                if ($result_delete_docente) {
-                    return "Registro eliminado";
-                }
-            }
-        
-            return "No se pudo eliminar el registro";
+        $sql = "DELETE FROM " . $this->cursoDT . " WHERE $this->codCurso = $cod";
+        $resultSQL = $this->execSql($sql);
+
+        if ($resultSQL) {
+            return "Curso eliminado";
+        }
+
+        return "No se pudo eliminar el curso";
         
     }
 }

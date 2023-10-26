@@ -11,6 +11,8 @@ abstract class EntityController{
     public abstract function updateItem($model);
     public abstract function deleteItem($pk);
 
+    
+
     protected function execSql($sql){
         $dbController = new DatabaseController();
         return $dbController->execSql($sql);

@@ -9,6 +9,8 @@
     <button>
         <a href="/taller_html_php/ejercicio4/indexDocentes.php">Docentes</a>
     </button>
-    <button>Cursos</button>
+    <button>
+        <a href="/taller_html_php/ejercicio4/indexCursos.php">Cursos</a>
+    </button>
 </body>
 </html>
